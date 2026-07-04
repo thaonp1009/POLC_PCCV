@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAM Media - Mô hình POLC - PCCV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #C22620;
+            --gold: #D4AF37;
+            --dark: #2B2F3A;
+            --ink: #23262E;
+            --grey: #5B616E;
+            --line: #E7E3DA;
+            --soft: #FAF8F4;
+            --bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position:relative;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--red);
+            padding-bottom: 12px;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--ink);
+            letter-spacing: 0.5px;
+        }
+
+        .logo b {
+            color: var(--red);
+        }
+
+        .top-bar .subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--grey);
+        }
+
+        /* Header Title */
+        .header-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-title {
+            font-size: 15px;
+            color: var(--grey);
+            font-weight: 500;
+        }
+
+        /* Flowchart Styles */
+        .flow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Block Base */
+        .block {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .block-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .block-desc {
+            font-size: 12.5px;
+            color: var(--grey);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* Core Strategic Block */
+        .block-strategic {
+            background-color: var(--red);
+            border: 2px solid var(--red);
+            color: #fff;
+            max-width: 460px;
+            padding: 18px 25px;
+        }
+        .block-strategic .block-desc {
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* Parallel Columns Section */
+        .columns-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 820px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 46%;
+            gap: 40px; /* Space for arrows */
+            position: relative;
+        }
+
+        .column-header {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: -15px;
+        }
+
+        /* Column Specific Accents */
+        .col-planning .column-header { color: var(--red); }
+        .col-planning .block { border: 2px solid var(--red); color: var(--ink); }
+        
+        .col-organizing .column-header { color: var(--gold); }
+        .col-organizing .block { border: 2px solid var(--gold); color: var(--ink); }
+
+        /* Middle Junction Block */
+        .block-junction {
+            border: 2px solid var(--gold);
+            background-color: var(--soft);
+            max-width: 580px;
+            padding: 16px 30px;
+        }
+
+        /* Action Blocks */
+        .block-pccv {
+            background-color: var(--red);
+            color: #fff;
+            max-width: 500px;
+            margin-top: 40px;
+        }
+        .block-pccv .block-desc { color: rgba(255,255,255,0.9); }
+
+        .block-control {
+            background-color: var(--dark);
+            color: #fff;
+            max-width: 530px;
+            margin-top: 40px;
+        }
+        .block-control .block-desc { color: rgba(255,255,255,0.85); }
+
+        /* Bottom Split Section */
+        .split-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 720px;
+            margin: 40px 0;
+        }
+        .split-container .block {
+            width: 47%;
+            max-width: 330px;
+            border: 2px solid var(--dark);
+        }
+
+        /* Evaluation Block */
+        .block-evaluation {
+            background-color: var(--gold);
+            border: 2px solid var(--gold);
+            color: var(--ink);
+            max-width: 550px;
+        }
+        .block-evaluation .block-desc { color: var(--ink); font-weight: 500; }
+
+        /* SVG Arrow Management */
+        .arrow-svg {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Side Loop Text Label */
+        .loop-text {
+            position: absolute;
+            right: 0;
+            top: 25%;
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--red);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 1px;
+            transform: translateX(15px);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding-top: 15px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            color: var(--grey);
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            .columns-container, .split-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                margin: 30px 0;
+            }
+            .column { width: 100%; max-width: 380px; }
+            .split-container .block { width: 100%; max-width: 380px; }
+            .arrow-svg.desktop-only { display: none; }
+            .loop-text { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span class="logo">PAM <b>Media</b></span>
+        <span class="subtitle">Hệ thống Quản trị & Vận hành Chuẩn mực</span>
+    </div>
+
+    <!-- Header Title -->
+    <div class="header-section">
+        <h1 class="main-title">Mô hình POLC - PCCV</h1>
+        <p class="sub-title">Hai dòng quy hoạch hội tụ tại Phân công công việc</p>
+        <p style="font-size:12.5px; color:var(--grey); margin-top:4px;">Đạt Mục tiêu thông qua người khác – gà đúng khi cho đúng người nuôi</p>
+    </div>
+
+    <!-- Main Flow Layout -->
+    <div class="flow-wrapper">
+
+        <!-- Top Strategic Goal Block -->
+        <div class="block block-strategic" id="b-strategy">
+            <h2 class="block-title">Bộ Mục Tiêu - Chiến Lược</h2>
+            <p class="block-desc">(NLĐ thiết lập đầu kỳ)</p>
+        </div>
+
+        <!-- SVG Arrows from Strategic to Columns -->
+        <svg class="arrow-svg desktop-only" width="800" height="50" style="top: 110px;">
+            <!-- Left branch -->
+            <path d="M 450,10 L 250,45" stroke="#C22620" stroke-width="2" fill="none" stroke-dasharray="4,4" />
+            <polygon points="250,45 258,40 252,36" fill="#C22620" />
+            <!-- Right branch -->
+            <path d="M 450,10 L 650,45" stroke="#D4AF37" stroke-width="2" fill="none" stroke-dasharray="4,4" />
+            <polygon points="650,45 648,36 642,40" fill="#D4AF37" />
+        </svg>
+
+        <!-- Two Columns: Planning & Organizing -->
+        <div class="columns-container">
+            
+            <!-- LEFT COLUMN: PLANNING -->
+            <div class="column col-planning">
+                <div class="column-header">Dòng Hoạch Định (P)</div>
+                
+                <div class="block" id="p-b1">
+                    <h2 class="block-title">Bộ Kế hoạch Hành động (KHHD)</h2>
+                    <p class="block-desc">Translate Mục tiêu &rarr; ngôn ngữ WHAT</p>
+                </div>
+                
+                <!-- Internal Arrow P1 -> P2 -->
+                <svg class="arrow-svg" width="40" height="40" style="position:relative; margin: -10px 0;"><path d="M 20,0 L 20,30" stroke="#C22620" stroke-width="2" fill="none" /><polygon points="20,30 15,22 25,22" fill="#C22620" /></svg>
+
+                <div class="block" id="p-b2">
+                    <h2 class="block-title">Bộ Cẩm nang Kế hoạch từng Phòng ban</h2>
+                    <p class="block-desc">= Tổng công việc trong kỳ<br>(ngắn hạn + dài hạn)</p>
+                </div>
+
+                <!-- Internal Arrow P2 -> P3 -->
+                <svg class="arrow-svg" width="40" height="40" style="position:relative; margin: -10px 0;"><path d="M 20,0 L 20,30" stroke="#C22620" stroke-width="2" fill="none" /><polygon points="20,30 15,22 25,22" fill="#C22620" /></svg>
+
+                <div class="block" id="p-b3">
+                    <h2 class="block-title" style="color:var(--red)">Đàn khỉ cần nuôi</h2>
+                    <p class="block-desc" style="color:var(--red); font-weight:600;">được quy hoạch, trù bị trước</p>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: ORGANIZING -->
+            <div class="column col-organizing">
+                <div class="column-header">Dòng Tổ Chức (O)</div>
+                
+                <div class="block" id="o-b1">
+                    <h2 class="block-title">Sơ đồ Tổ chức (SĐTC)</h2>
+                    <p class="block-desc">cấu trúc theo Mục tiêu - Chiến lược</p>
+                </div>
+
+                <!-- Internal Arrow O1 -> O2 -->
+                <svg class="arrow-svg" width="40" height="40" style="position:relative; margin: -10px 0;"><path d="M 20,0 L 20,30" stroke="#D4AF37" stroke-width="2" fill="none" /><polygon points="20,30 15,22 25,22" fill="#D4AF37" /></svg>
+
+                <div class="block" id="o-b2">
+                    <h2 class="block-title">Bộ Chức danh & MTCV</h2>
+                    <p class="block-desc">Job Title - Responsibilities<br>Job Requirement (~ Competencies)</p>
+                </div>
+
+                <!-- Internal Arrow O2 -> O3 -->
+                <svg class="arrow-svg" width="40" height="40" style="position:relative; margin: -10px 0;"><path d="M 20,0 L 20,30" stroke="#D4AF37" stroke-width="2" fill="none" /><polygon points="20,30 15,22 25,22" fill="#D4AF37" /></svg>
+
+                <div class="block" id="o-b3">
+                    <h2 class="block-title">Chiêu mộ - Tuyển dụng &rarr; xếp vị trí</h2>
+                </div>
+
+                <!-- Internal Arrow O3 -> O4 -->
+                <svg class="arrow-svg" width="40" height="40" style="position:relative; margin: -10px 0;"><path d="M 20,0 L 20,30" stroke="#D4AF37" stroke-width="2" fill="none" /><polygon points="20,30 15,22 25,22" fill="#D4AF37" /></svg>
+
+                <div class="block" id="o-b4">
+                    <h2 class="block-title" style="color:#9a7d16">Người nuôi khỉ</h2>
+                    <p class="block-desc" style="color:#9a7d16; font-weight:600;">(Person in charge)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SVG Convergence Arrows to Junction Block -->
+        <svg class="arrow-svg desktop-only" width="800" height="50" style="top: 505px;">
+            <!-- From Left Column Bottom -->
+            <path d="M 225,0 L 320,35" stroke="#C22620" stroke-width="2" fill="none" />
+            <polygon points="320,35 311,31 315,26" fill="#C22620" />
+            <!-- From Right Column Bottom -->
+            <path d="M 575,0 L 480,35" stroke="#D4AF37" stroke-width="2" fill="none" />
+            <polygon points="480,35 485,26 489,31" fill="#D4AF37" />
+        </svg>
+
+        <!-- Junction Block: Cân đối năng lực -->
+        <div class="block block-junction" id="b-junction">
+            <h2 class="block-title" style="color:#9a7d16;">Cổng Cân Đối Năng Lực - Khối Lượng (Điểm đòn bẩy 80/20)</h2>
+            <p class="block-desc" style="color:var(--ink); font-weight: 500;">Số khỉ &larr;&rarr; Số người nuôi &times; Năng lực &minus; zero orphan, không quá tải</p>
+        </div>
+
+        <!-- Arrow from Junction to PCCV -->
+        <svg class="arrow-svg" width="40" height="45" style="position:relative; margin: 0 auto;"><path d="M 20,0 L 20,35" stroke="#C22620" stroke-width="2" fill="none" /><polygon points="20,35 15,25 25,25" fill="#C22620" /></svg>
+
+        <!-- Core Action Block: Phân công công việc -->
+        <div class="block block-pccv" id="b-pccv">
+            <h2 class="block-title">Phân Công Công Việc (PCCV)</h2>
+            <p class="block-desc" style="font-weight: 600;">Gả đúng khỉ cho đúng người nuôi<br>= Lãnh đạo thành công qua người khác</p>
+        </div>
+
+        <!-- Arrow from PCCV to L+C -->
+        <svg class="arrow-svg" width="40" height="45" style="position:relative; margin: 0 auto;"><path d="M 20,0 L 20,35" stroke="#2B2F3A" stroke-width="2" fill="none" /><polygon points="20,35 15,25 25,25" fill="#2B2F3A" /></svg>
+
+        <!-- Control Block: Lãnh đạo & Kiểm soát -->
+        <div class="block block-control" id="b-control">
+            <h2 class="block-title">Lãnh Đạo & Kiểm Soát (L + C)</h2>
+            <p class="block-desc">Thúc đẩy • Dẫn dắt • Kiểm soát để kết quả đúng trù bị</p>
+        </div>
+
+        <!-- Curved Split Arrows from L+C to Bottom Cards -->
+        <svg class="arrow-svg desktop-only" width="800" height="50" style="top: 805px;">
+            <!-- To Left (Báo cáo) -->
+            <path d="M 450,0 Q 320,10 250,35" stroke="#2B2F3A" stroke-width="2" fill="none" />
+            <polygon points="250,35 259,32 255,24" fill="#2B2F3A" />
+            <!-- To Right (KPIs) -->
+            <path d="M 450,0 Q 580,10 650,35" stroke="#2B2F3A" stroke-width="2" fill="none" />
+            <polygon points="650,35 645,24 641,32" fill="#2B2F3A" />
+        </svg>
+
+        <!-- Bottom Split Section -->
+        <div class="split-container">
+            <div class="block" id="split-left">
+                <h2 class="block-title">Bộ Báo Cáo</h2>
+                <p class="block-desc" style="color:var(--ink); font-weight:600;">Trả lời: TẠI SAO</p>
+            </div>
+            <div class="block" id="split-right">
+                <h2 class="block-title">Bộ KPIs</h2>
+                <p class="block-desc" style="color:var(--ink); font-weight:600;">Trả lời: CÓ ĐẠT KHÔNG</p>
+            </div>
+        </div>
+
+        <!-- Combined Converging Curved Arrows to Evaluation -->
+        <svg class="arrow-svg desktop-only" width="800" height="50" style="top: 920px;">
+            <path d="M 250,0 Q 320,30 450,40" stroke="#2B2F3A" stroke-width="2" fill="none" />
+            <path d="M 650,0 Q 580,30 450,40" stroke="#2B2F3A" stroke-width="2" fill="none" />
+            <polygon points="450,40 458,32 442,32" fill="#2B2F3A" />
+        </svg>
+
+        <!-- Final Evaluation Block -->
+        <div class="block block-evaluation" id="b-evaluation">
+            <h2 class="block-title">Xếp Loại Tổ chức - Đội nhóm - Cá nhân</h2>
+            <p class="block-desc">&rarr; Quyết định Nhân sự + Đúc kết bài học (học kép)</p>
+        </div>
+
+        <!-- Dotted Feedback Loop Back to Top (O) -->
+        <svg class="arrow-svg desktop-only" width="800" height="700" style="top: 250px; left:0; width:100%; height:730px;">
+            <!-- Dashed loop line going up right side -->
+            <path d="M 450,710 Q 750,550 650,10" stroke="#C22620" stroke-width="1.5" stroke-dasharray="6,4" fill="none" />
+            <polygon points="650,10 651,20 659,14" fill="#C22620" />
+        </svg>
+        <div class="loop-text desktop-only">VÒNG LẶP ĐỘNG — đầu vào kỳ mới</div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        PAM Media &copy; 2026 | Hệ thống Quản trị chuyển giao bền vững
+    </div>
+
+</div>
+
+</body>
+</html>
