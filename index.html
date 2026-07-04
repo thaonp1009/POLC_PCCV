@@ -1,450 +1,207 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAM Media - Mô hình POLC - PCCV</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --orange: #FF6B00; /* Màu Cam PAM Media */
-            --green: #27AE60;  /* Màu Xanh lá */
-            --dark: #2A2F35;
-            --ink: #1F2226;
-            --grey: #7F8C8D;
-            --line: #D0D4D9;
-            --soft: #F4F9F5;
-            --bg: #FFFFFF;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--ink);
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-size: 13.5px;
-            line-height: 1.5;
-            padding: 30px 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        /* Top Bar */
-        .top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 2px solid var(--orange);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--ink);
-            letter-spacing: -0.5px;
-        }
-
-        .logo b { color: var(--orange); }
-        .top-bar .subtitle {
-            font-weight: 500;
-            font-size: 13px;
-            color: var(--grey);
-        }
-
-        /* Title Header */
-        .header-section {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .main-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--orange);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        .sub-title {
-            font-size: 14px;
-            color: var(--grey);
-            font-weight: 500;
-        }
-
-        /* Flow Layout */
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            position: relative;
-        }
-
-        /* Khối chuẩn dạng hộp phẳng, bo góc nhẹ chuẩn 4px */
-        .node-box {
-            background: #fff;
-            border-radius: 4px;
-            padding: 12px 15px;
-            text-align: center;
-            width: 100%;
-            position: relative;
-            z-index: 2;
-        }
-
-        .block-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 3px;
-            text-transform: uppercase;
-        }
-
-        .block-desc {
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        /* Khối Chiến lược trên cùng */
-        .block-strategic {
-            background-color: var(--orange);
-            border: 2px solid var(--orange);
-            color: #fff;
-            max-width: 420px;
-        }
-        .block-strategic .block-desc { color: rgba(255,255,255,0.9); }
-
-        /* Chữ xám dưới bộ mục tiêu chiến lược */
-        .strategic-subtext {
-            color: var(--grey);
-            font-size: 12px;
-            font-weight: 500;
-            margin-top: 8px;
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        /* Bố cục hai cột song song */
-        .columns-layout {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 860px;
-            margin-top: 15px;
-            margin-bottom: 0;
-        }
-
-        .column {
-            width: 45%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .column-header {
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .col-planning .column-header { color: var(--orange); }
-        .col-planning .node-box { border: 2px solid var(--orange); color: var(--ink); }
-
-        .col-organizing .column-header { color: var(--green); }
-        .col-organizing .node-box { border: 2px solid var(--green); color: var(--ink); }
-
-        /* Khối dọc trục chính */
-        .block-pccv {
-            background-color: var(--orange);
-            border: 2px solid var(--orange);
-            color: #fff;
-            max-width: 500px;
-            width: 100%;
-        }
-        .block-pccv .block-desc { color: rgba(255,255,255,0.9); }
-
-        .block-control {
-            background-color: var(--dark);
-            border: 2px solid var(--dark);
-            color: #fff;
-            max-width: 520px;
-            width: 100%;
-        }
-        .block-control .block-desc { color: rgba(255,255,255,0.85); }
-
-        /* Cổng cân đối năng lực trung tâm */
-        .node-junction {
-            border: 2px solid var(--green);
-            background-color: var(--soft);
-            max-width: 640px;
-            width: 100%;
-        }
-        .node-junction .block-title { color: var(--green); }
-
-        /* Bộ báo cáo và KPIs */
-        .split-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 640px;
-        }
-        .split-container .node-box {
-            width: 45%;
-            border: 2px solid var(--dark);
-        }
-
-        /* Khối xếp loại kết quả cuối cùng */
-        .block-evaluation {
-            background-color: var(--green);
-            border: 2px solid var(--green);
-            color: #fff;
-            max-width: 540px;
-            width: 100%;
-        }
-        .block-evaluation .block-desc { color: rgba(255,255,255,0.9); font-weight: 500; }
-
-        /* KỸ THUẬT DỰNG MŨI TÊN SVG KHÔNG LỆCH VỊ TRÍ */
-        .svg-arrow-container {
-            display: block;
-            width: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* VÒNG LẶP ĐỘNG (Feedback Loop chạy dọc bên phải) */
-        .feedback-loop-wrapper {
-            position: absolute;
-            right: -25px;
-            top: 50px;
-            bottom: 25px;
-            width: 60px;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .feedback-text {
-            position: absolute;
-            right: -25px;
-            top: 45%;
-            transform: translateY(-50%);
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--orange);
-            letter-spacing: 1px;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 50px;
-            padding-top: 15px;
-            border-top: 1px solid var(--line);
-            text-align: center;
-            color: var(--grey);
-            font-size: 12.5px;
-        }
-
-        /* Mobile View */
-        @media (max-width: 768px) {
-            .columns-layout, .split-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            .column, .split-container .node-box { width: 100%; }
-            .svg-arrow-container, .feedback-loop-wrapper, .feedback-text { display: none; }
-            .node-box { margin-bottom: 15px; }
-            .column-header { margin-bottom: 10px; }
-            .mobile-spacer {
-                width: 2px; height: 20px; background: var(--grey); margin: 5px 0; position: relative;
-            }
-            .mobile-spacer::after {
-                content: ""; position: absolute; bottom: 0; left: -4px;
-                border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--grey);
-            }
-        }
-        @media (min-width: 769px) {
-            .mobile-spacer { display: none; }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Mô hình POLC - PCCV (PAM Media)</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .canvas {
+    position: relative;
+    width: 1300px;
+    height: 1700px;
+  }
+  .box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 14px;
+    padding: 10px 18px;
+    font-size: 15px;
+    line-height: 1.35;
+    z-index: 3;
+  }
+  .box b { display:block; font-size:16px; margin-bottom:2px; }
+  .title-main {
+    position:absolute; top:15px; left:0; width:100%; text-align:center;
+    font-size: 28px; font-weight: 800; color:#ea580c; letter-spacing:1px; z-index:3;
+  }
+  .title-sub {
+    position:absolute; top:52px; left:0; width:100%; text-align:center;
+    font-size: 19px; font-weight: 600; color:#222; z-index:3;
+  }
+  .title-italic {
+    position:absolute; top:82px; left:0; width:100%; text-align:center;
+    font-size: 13px; font-style: italic; color:#666; z-index:3;
+  }
+  .mini-italic {
+    position:absolute; left:50%; transform: translateX(-50%); text-align:center;
+    font-size: 12px; font-style: italic; color:#777; white-space:nowrap; z-index:3;
+  }
+  .col-header {
+    position:absolute; font-size: 17px; font-weight: 800; white-space:nowrap;
+    background:#ffffff; padding:2px 6px; z-index:3;
+  }
+  .vert-label {
+    position:absolute; font-size:13px; font-weight:700; color:#ea580c;
+    writing-mode: vertical-rl; transform: rotate(180deg); z-index:3;
+  }
+  .footer {
+    position:absolute; bottom:20px; left:0; width:100%; text-align:center;
+    font-size:14px; color:#555; letter-spacing:0.5px; z-index:3;
+  }
+  svg { position:absolute; top:0; left:0; overflow:visible; z-index:1; }
+</style>
 </head>
 <body>
+<div class="canvas">
 
-<div class="container">
+  <!-- ===== TITLE ===== -->
+  <div class="title-main">MÔ HÌNH POLC - PCCV</div>
+  <div class="title-sub">Hai dòng quy hoạch hội tụ tại Phân công công việc</div>
+  <div class="title-italic">Đạt Mục tiêu thông qua người khác — gả đúng khỉ cho đúng người nuôi</div>
 
-    <div class="top-bar">
-        <span class="logo">PAM <b>Media</b></span>
-        <span class="subtitle">Hệ thống Quản trị & Vận hành Doanh nghiệp</span>
-    </div>
+  <!-- ===== TOP BOX (đỏ -> cam) ===== -->
+  <div class="box" style="left:390px; top:130px; width:520px; height:100px;
+       background:linear-gradient(135deg,#f97316,#fb923c); color:#fff; font-weight:700;">
+    <div><b>BỘ MỤC TIÊU - CHIẾN LƯỢC</b>(NLĐ thiết lập đầu kỳ)</div>
+  </div>
 
-    <div class="header-section">
-        <h1 class="main-title">Mô hình POLC - PCCV</h1>
-        <p class="sub-title">Hai dòng quy hoạch hội tụ tại Phân công công việc</p>
-        <p style="font-size: 12px; color: var(--grey); margin-top: 3px; font-weight: 500;">Đạt Mục tiêu thông qua người khác - gả đúng khỉ cho đúng người nuôi</p>
-    </div>
+  <div class="mini-italic" style="top:255px; left:610px;">Hai phép phân rã song song của cùng một Chiến lược</div>
 
-    <div class="flow-container">
+  <!-- Column headers -->
+  <div class="col-header" style="left:70px; top:282px; color:#ea580c;">DÒNG HOẠCH ĐỊNH (P)</div>
+  <div class="col-header" style="left:820px; top:282px; color:#16a34a;">DÒNG TỔ CHỨC (O)</div>
 
-        <div class="feedback-loop-wrapper">
-            <svg width="60" height="100%" style="height: calc(100% - 20px);">
-                <path d="M 0, 10 L 40, 10 L 40, calc(100% - 10px) L 0, calc(100% - 10px)" fill="none" stroke="#FF6B00" stroke-width="2" stroke-dasharray="6,4" />
-                <polygon points="0,10 8,6 8,14" fill="#FF6B00" />
-            </svg>
-            <div class="feedback-text">VÒNG LẶP ĐỘNG — đầu vào kỳ mới</div>
-        </div>
+  <!-- ===== LEFT COLUMN (cam) ===== -->
+  <div class="box" style="left:30px; top:320px; width:480px; height:90px; border:3px solid #ea580c; background:#fff; color:#111;">
+    <div><b>BỘ KẾ HOẠCH HÀNH ĐỘNG (KHHĐ)</b>Translate Mục tiêu → ngôn ngữ WHAT</div>
+  </div>
 
-        <div class="node-box block-strategic">
-            <h2 class="block-title">Bộ Mục Tiêu - Chiến Lược</h2>
-            <p class="block-desc">(NLĐ thiết lập đầu kỳ)</p>
-        </div>
-        
-        <div class="strategic-subtext">Hai phép phân rã song song của cùng một Chiến lược</div>
+  <div class="box" style="left:30px; top:450px; width:480px; height:110px; border:3px solid #ea580c; background:#fff; color:#111;">
+    <div><b>BỘ CẨM NANG KẾ HOẠCH từng Phòng ban</b>= Tổng công việc trong kỳ<br>(ngắn hạn + dài hạn)</div>
+  </div>
 
-        <svg class="svg-arrow-container" height="40" width="100%">
-            <path d="M calc(50% - 100px),0 L calc(50% - 210px),35" fill="none" stroke="#7F8C8D" stroke-width="1.5" stroke-dasharray="4,4" />
-            <polygon points="calc(50% - 210px),35 calc(50% - 203px),28 calc(50% - 212px),26" fill="#7F8C8D" />
-            <path d="M calc(50% + 100px),0 L calc(50% + 210px),35" fill="none" stroke="#7F8C8D" stroke-width="1.5" stroke-dasharray="4,4" />
-            <polygon points="calc(50% + 210px),35 calc(50% + 212px),26 calc(50% + 203px),28" fill="#7F8C8D" />
-        </svg>
-        <div class="mobile-spacer"></div>
+  <div class="box" style="left:30px; top:600px; width:480px; height:90px; border:3px solid #ea580c; background:#fff; color:#ea580c; font-weight:700;">
+    <div>ĐÀN KHỈ CẦN NUÔI<br><span style="font-weight:400;">được quy hoạch, trù bị trước</span></div>
+  </div>
 
-        <div class="columns-layout">
-            
-            <div class="column col-planning">
-                <div class="column-header">Dòng Hoạch Định (P)</div>
-                
-                <div class="node-box">
-                    <h2 class="block-title">Bộ Kế hoạch Hành động (KHHD)</h2>
-                    <p class="block-desc">Translate Mục tiêu &rarr; ngôn ngữ WHAT</p>
-                </div>
-                
-                <svg class="svg-arrow-container" height="30" width="40"><path d="M 20,0 L 20,25" stroke="#FF6B00" stroke-width="2" fill="none" /><polygon points="20,25 15,18 25,18" fill="#FF6B00" /></svg>
+  <!-- ===== RIGHT COLUMN (xanh lá) ===== -->
+  <div class="box" style="left:710px; top:320px; width:480px; height:90px; border:3px solid #16a34a; background:#fff; color:#111;">
+    <div><b>SƠ ĐỒ TỔ CHỨC (SĐTC)</b>cấu trúc theo Mục tiêu - Chiến lược</div>
+  </div>
 
-                <div class="node-box">
-                    <h2 class="block-title">Bộ Cẩm nang Kế hoạch từng Phòng ban</h2>
-                    <p class="block-desc">= Tổng công việc trong kỳ (ngắn hạn + dài hạn)</p>
-                </div>
+  <div class="box" style="left:710px; top:450px; width:480px; height:110px; border:3px solid #16a34a; background:#fff; color:#111;">
+    <div><b>BỘ CHỨC DANH &amp; MTCV</b>Job Title · Responsibilities<br>Job Requirement (~ Competencies)</div>
+  </div>
 
-                <svg class="svg-arrow-container" height="30" width="40"><path d="M 20,0 L 20,25" stroke="#FF6B00" stroke-width="2" fill="none" /><polygon points="20,25 15,18 25,18" fill="#FF6B00" /></svg>
+  <div class="box" style="left:710px; top:600px; width:480px; height:90px; border:3px solid #16a34a; background:#fff; color:#111;">
+    Chiêu mộ - Tuyển dụng → xếp vị trí
+  </div>
 
-                <div class="node-box">
-                    <h2 class="block-title" style="color: var(--orange);">Đàn khỉ cần nuôi</h2>
-                    <p class="block-desc" style="color: var(--orange); font-weight: 600;">được quy hoạch, trù bị trước</p>
-                </div>
-            </div>
+  <div class="box" style="left:710px; top:730px; width:480px; height:90px; border:3px solid #16a34a; background:#fff; color:#111;">
+    <div><b>NGƯỜI NUÔI KHỈ</b>(Person in charge)</div>
+  </div>
 
-            <div class="column col-organizing">
-                <div class="column-header">Dòng Tổ Chức (O)</div>
-                
-                <div class="node-box">
-                    <h2 class="block-title">Sơ đồ Tổ chức (SĐTC)</h2>
-                    <p class="block-desc">cấu trúc theo Mục tiêu - Chiến lược</p>
-                </div>
-                
-                <svg class="svg-arrow-container" height="30" width="40"><path d="M 20,0 L 20,25" stroke="#27AE60" stroke-width="2" fill="none" /><polygon points="20,25 15,18 25,18" fill="#27AE60" /></svg>
+  <!-- Vertical label right side -->
+  <div class="vert-label" style="left:1250px; top:600px; height:400px;">VÒNG LẶP ĐỒNG — đầu vào kỳ mới</div>
 
-                <div class="node-box">
-                    <h2 class="block-title">Bộ Chức danh & MTCV</h2>
-                    <p class="block-desc">Job Title - Responsibilities<br>Job Requirement (~ Competencies)</p>
-                </div>
+  <!-- ===== MERGE BOX (vàng -> xanh lá nhạt) ===== -->
+  <div class="box" style="left:150px; top:850px; width:1000px; height:110px; border:3px solid #16a34a; background:#f0fdf4; color:#111; font-weight:700;">
+    <div>CỔNG CÂN ĐỐI NĂNG LỰC - KHỐI LƯỢNG (điểm đòn bẩy 80/20)<br>
+    <span style="font-weight:400;">Số khỉ ↔ Số người nuôi × Năng lực — zero orphan, không quá tải</span></div>
+  </div>
 
-                <svg class="svg-arrow-container" height="30" width="40"><path d="M 20,0 L 20,25" stroke="#27AE60" stroke-width="2" fill="none" /><polygon points="20,25 15,18 25,18" fill="#27AE60" /></svg>
+  <!-- ===== PCCV BOX (đỏ -> cam) ===== -->
+  <div class="box" style="left:390px; top:1030px; width:520px; height:110px;
+       background:linear-gradient(135deg,#f97316,#fb923c); color:#fff; font-weight:700;">
+    <div><b>PHÂN CÔNG CÔNG VIỆC (PCCV)</b>Gả đúng khỉ cho đúng người nuôi<br>= Lãnh đạo thành công qua người khác</div>
+  </div>
 
-                <div class="node-box">
-                    <h2 class="block-title">Chiêu mộ - Tuyển dụng</h2>
-                    <p class="block-desc">&rarr; xếp vị trí</p>
-                </div>
+  <!-- ===== LÃNH ĐẠO & KIỂM SOÁT (giữ nguyên màu tối) ===== -->
+  <div class="box" style="left:390px; top:1180px; width:520px; height:110px; background:#262626; color:#fff; font-weight:700;">
+    <div><b>LÃNH ĐẠO &amp; KIỂM SOÁT (L + C)</b>Thúc đẩy · Dẫn dắt · Kiểm soát để kết quả đúng trù bị</div>
+  </div>
 
-                <svg class="svg-arrow-container" height="30" width="40"><path d="M 20,0 L 20,25" stroke="#27AE60" stroke-width="2" fill="none" /><polygon points="20,25 15,18 25,18" fill="#27AE60" /></svg>
+  <!-- ===== BỘ BÁO CÁO / BỘ KPIs (giữ nguyên viền đen) ===== -->
+  <div class="box" style="left:150px; top:1350px; width:430px; height:90px; border:2.5px solid #111; background:#fff; color:#111; font-weight:600;">
+    <div><b>BỘ BÁO CÁO</b>Trả lời TẠI SAO</div>
+  </div>
 
-                <div class="node-box">
-                    <h2 class="node-title block-title" style="color: var(--green);">Người nuôi khỉ</h2>
-                    <p class="block-desc" style="color: var(--green); font-weight: 600;">(Person in charge)</p>
-                </div>
-            </div>
+  <div class="box" style="left:720px; top:1350px; width:430px; height:90px; border:2.5px solid #111; background:#fff; color:#111; font-weight:600;">
+    <div><b>BỘ KPIs</b>Trả lời CÓ ĐẠT KHÔNG</div>
+  </div>
 
-        </div>
+  <!-- ===== XẾP LOẠI (vàng -> xanh lá) ===== -->
+  <div class="box" style="left:390px; top:1500px; width:520px; height:110px;
+       background:linear-gradient(135deg,#22c55e,#4ade80); color:#111; font-weight:700;">
+    <div><b>XẾP LOẠI  Tổ chức - Đội nhóm - Cá nhân</b>→ Quyết định Nhân sự  +  Đúc kết bài học (học kép)</div>
+  </div>
 
-        <svg class="svg-arrow-container" height="40" width="100%">
-            <path d="M calc(50% - 210px),0 L calc(50% - 210px),20 L calc(50% - 10px),20 L calc(50% - 10px),35" fill="none" stroke="#FF6B00" stroke-width="2" />
-            <path d="M calc(50% + 210px),0 L calc(50% + 210px),20 L calc(50% + 10px),20 L calc(50% + 10px),35" fill="none" stroke="#27AE60" stroke-width="2" />
-            <polygon points="50%,38 calc(50% - 6px),30 calc(50% + 6px),30" fill="#27AE60" />
-        </svg>
-        <div class="mobile-spacer"></div>
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">PAM Media Academy&nbsp; | &nbsp;pammedia.vn&nbsp; | &nbsp;Tư duy Quản trị gốc</div>
 
-        <div class="node-box node-junction">
-            <h2 class="block-title">Cổng Cân Đối Năng Lực - Khối Lượng (Điểm đòn bẩy 80/20)</h2>
-            <p class="block-desc">Số khỉ &larr;&rarr; Số người nuôi &times; Năng lực &minus; zero orphan, không quá tải</p>
-        </div>
+  <!-- ===================== SVG ARROWS ===================== -->
+  <svg width="1300" height="1700">
+    <defs>
+      <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+      </marker>
+      <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
+      </marker>
+      <marker id="arrow-black" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
+      </marker>
+      <marker id="arrow-orange-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/>
+      </marker>
+    </defs>
 
-        <svg class="svg-arrow-container" height="35" width="40"><path d="M 20,0 L 20,30" stroke="#FF6B00" stroke-width="2" fill="none" /><polygon points="20,30 14,22 26,22" fill="#FF6B00" /></svg>
-        <div class="mobile-spacer"></div>
+    <!-- diagonal from top box down to each column header -->
+    <path d="M 390 230 L 270 300" stroke="#ea580c" stroke-width="3" fill="none" marker-end="url(#arrow-orange)"/>
+    <path d="M 910 230 L 950 300" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
 
-        <div class="node-box block-pccv">
-            <h2 class="block-title">Phân Công Công Việc (PCCV)</h2>
-            <p class="block-desc" style="font-weight: 600;">Gả đúng khỉ cho đúng người nuôi<br>= Lãnh đạo thành công qua người khác</p>
-        </div>
+    <!-- left column vertical arrows -->
+    <path d="M 270 410 L 270 450" stroke="#ea580c" stroke-width="3" fill="none" marker-end="url(#arrow-orange)"/>
+    <path d="M 270 560 L 270 600" stroke="#ea580c" stroke-width="3" fill="none" marker-end="url(#arrow-orange)"/>
+    <path d="M 270 690 L 270 850" stroke="#ea580c" stroke-width="3" fill="none" marker-end="url(#arrow-orange)"/>
 
-        <svg class="svg-arrow-container" height="35" width="40"><path d="M 20,0 L 20,30" stroke="#7F8C8D" stroke-width="2" fill="none" /><polygon points="20,30 14,22 26,22" fill="#7F8C8D" /></svg>
-        <div class="mobile-spacer"></div>
+    <!-- right column vertical arrows -->
+    <path d="M 950 410 L 950 450" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+    <path d="M 950 560 L 950 600" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+    <path d="M 950 690 L 950 730" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+    <path d="M 950 820 L 950 850" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
 
-        <div class="node-box block-control">
-            <h2 class="block-title">Lãnh Đạo & Kiểm Soát (L + C)</h2>
-            <p class="block-desc">Thúc đẩy • Dẫn dắt • Kiểm soát để kết quả đúng trù bị</p>
-        </div>
+    <!-- merge box -> PCCV -->
+    <path d="M 350 960 L 560 1030" stroke="#ea580c" stroke-width="3" fill="none" marker-end="url(#arrow-orange)"/>
+    <path d="M 850 960 L 720 1030" stroke="#16a34a" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
 
-        <svg class="svg-arrow-container" height="35" width="100%">
-            <path d="M 50%,0 L 50%,15 L calc(50% - 165px),15 L calc(50% - 165px),30" fill="none" stroke="#2A2F35" stroke-width="2" />
-            <polygon points="calc(50% - 165px),32 calc(50% - 170px),24 calc(50% - 160px),24" fill="#2A2F35" />
-            <path d="M 50%,0 L 50%,15 L calc(50% + 165px),15 L calc(50% + 165px),30" fill="none" stroke="#2A2F35" stroke-width="2" />
-            <polygon points="calc(50% + 165px),32 calc(50% + 160px),24 calc(50% + 170px),24" fill="#2A2F35" />
-        </svg>
-        <div class="mobile-spacer"></div>
+    <!-- PCCV -> LÃNH ĐẠO -->
+    <path d="M 650 1140 L 650 1180" stroke="#111111" stroke-width="4" fill="none" marker-end="url(#arrow-black)"/>
 
-        <div class="split-container">
-            <div class="node-box">
-                <h2 class="block-title">Bộ Báo Cáo</h2>
-                <p class="block-desc" style="font-weight: 600; color: var(--ink);">Trả lời: TẠI SAO</p>
-            </div>
-            <div class="node-box">
-                <h2 class="block-title">Bộ KPIs</h2>
-                <p class="block-desc" style="font-weight: 600; color: var(--ink);">Trả lời: CÓ ĐẠT KHÔNG</p>
-            </div>
-        </div>
+    <!-- LÃNH ĐẠO -> BÁO CÁO / KPIs (curved) -->
+    <path d="M 500 1290 C 380 1310, 340 1320, 365 1350" stroke="#111111" stroke-width="2.5" fill="none" marker-end="url(#arrow-black)"/>
+    <path d="M 800 1290 C 920 1310, 960 1320, 935 1350" stroke="#111111" stroke-width="2.5" fill="none" marker-end="url(#arrow-black)"/>
 
-        <svg class="svg-arrow-container" height="35" width="100%">
-            <path d="M calc(50% - 165px),0 L calc(50% - 165px),15 L 50%,15 L 50%,30" fill="none" stroke="#2A2F35" stroke-width="2" />
-            <path d="M calc(50% + 165px),0 L calc(50% + 165px),15 L 50%,15 L 50%,30" fill="none" stroke="#2A2F35" stroke-width="2" />
-            <polygon points="50%,32 45%,24 55%,24" fill="#2A2F35" />
-        </svg>
-        <div class="mobile-spacer"></div>
+    <!-- BÁO CÁO / KPIs -> XẾP LOẠI (curved) -->
+    <path d="M 365 1440 C 340 1470, 480 1490, 560 1500" stroke="#111111" stroke-width="2.5" fill="none" marker-end="url(#arrow-black)"/>
+    <path d="M 935 1440 C 960 1470, 820 1490, 740 1500" stroke="#111111" stroke-width="2.5" fill="none" marker-end="url(#arrow-black)"/>
 
-        <div class="node-box block-evaluation">
-            <h2 class="block-title">Xếp Loại Tổ chức - Đội nhóm - Cá nhân</h2>
-            <p class="block-desc">&rarr; Quyết định Nhân sự + Đúc kết bài học (học kép)</p>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        PAM Media &copy; 2026 | Hệ thống Quản trị chuyển giao bền vững
-    </div>
+    <!-- Dashed feedback loop (đỏ -> cam) -->
+    <path d="M 850 1500 C 1120 1280, 1120 500, 1050 300 C 1030 250, 1010 210, 1000 190"
+          stroke="#ea580c" stroke-width="2.5" stroke-dasharray="9,7" fill="none" marker-end="url(#arrow-orange-dash)"/>
+  </svg>
 
 </div>
-
 </body>
 </html>
